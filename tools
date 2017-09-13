@@ -1,0 +1,18 @@
+iverilog (check RTL design)
+- write synthesizable code: design.v
+- write testbench code: testbench.v
+- compile (creates vvp file)
+    $ iverilog -o testbench.vvp testbench.v
+- run vvp (creates vcd file)
+    $ vvp testbench.vvp
+- view waveform
+    $ gtkwave   // then select signal and append
+
+yosys (logic sythesize)
+- sequence
+    $ yosys
+    yosys> read_verilog design.v
+    yosys> techmap      // map the design to default technology
+    yosys> opt          // optimize the design
+    yosys> show         // show the synthesized result
+- note: fundamental building block (e.g. NOT gate) are called "cells". Rarely need to look into it. 
