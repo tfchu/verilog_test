@@ -1,3 +1,10 @@
+## Installation ##
+- iverilog
+- mac
+# brew install icarus-verilog
+
+
+
 iverilog (check RTL design)
 - write synthesizable code: design.v
 - write testbench code: testbench.v
