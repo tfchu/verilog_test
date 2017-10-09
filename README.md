@@ -4,14 +4,14 @@
 $ brew install icarus-verilog
 
 ## yosys (https://github.com/cliffordwolf/yosys/blob/master/README.md)
-`$ git clone https://github.com/cliffordwolf/yosys`
-go to /yosys
+- ```$ git clone https://github.com/cliffordwolf/yosys```
+- go to /yosys
 ```
-$ brew tap Homebrew/bundle && brew bundle
-$ make config-clang
-$ make
-$ make test
-$ sudo make install
+- $ brew tap Homebrew/bundle && brew bundle
+- $ make config-clang
+- $ make
+- $ make test
+- $ sudo make install
 ```
 
 ### xdot for yosys
