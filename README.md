@@ -38,15 +38,21 @@ to /usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/
 ## iverilog (check RTL design)
 - write synthesizable code: design.v
 - write testbench code: testbench.sv
-- ```$ iverilog -o testbench.vvp testbench.sv``` //compile (creates vvp file)
-- ```$ vvp testbench.vvp``` //run vvp (creates vcd file)
-- ```$ gtkwave dump.vcd```  // open vcd, then select signal and append
+- ```$ iverilog -o testbench.vvp testbench.sv```
+  - compile (creates vvp file), design.v is used inside testbench hence not called
+- ```$ vvp testbench.vvp```
+  - run vvp (creates vcd file)
+- ```$ gtkwave dump.vcd```
+  - open vcd, then select signal and append
 
 ## yosys (logic sythesize)
 - ```$ yosys```
 - ```yosys> read_verilog design.v```
-- ```yosys> techmap      // map the design to default technology```
-- ```yosys> opt          // optimize the design```
-- ```yosys> show         // show the synthesized result, (alternative) show -format ps -viewer gv```
+- ```yosys> techmap```
+  - map the design to default technology
+- ```yosys> opt```
+  - optimize the design
+- ```yosys> show```
+  - show the synthesized result, (alternative) show -format ps -viewer gv
 
 note: fundamental building block (e.g. NOT gate) are called "cells". Rarely need to look into it. 
