@@ -35,7 +35,15 @@ to /usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/
   - change `# X11Forwarding no` to `X11Forwarding yes`
 
 # Run
-## iverilog (check RTL design)
+## iverilog 
+### design file
+- write synthesizable code: design.v
+- ```$iverilog -o design design.v```
+  - compile the code
+- ```vvp design```
+  - execute the code
+
+### test bench (check RTL design)
 - write synthesizable code: design.v
 - write testbench code: testbench.sv
 - ```$ iverilog -o testbench.vvp testbench.sv```
