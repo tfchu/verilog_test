@@ -5,32 +5,21 @@
 - (Display) - *magic* -> SPICE netlist .sim netlist GDS2 output
 
 # Tools
-## iverilog
-- http://iverilog.icarus.com/
+- [iverilog](http://iverilog.icarus.com/)
+- [yosys](https://github.com/cliffordwolf/yosys/blob/master/README.md)
+- [graywolf](https://github.com/rubund/graywolf)
+- [qrouter](http://opencircuitdesign.com/qrouter/)
+- [magic](http://opencircuitdesign.com/magic/)
+- [qflow](http://opencircuitdesign.com/qflow/)
 
-## yosys
-- https://github.com/cliffordwolf/yosys/blob/master/README.md
-
-## graywolf
-- https://github.com/rubund/graywolf
-
-## qrouter
-- http://opencircuitdesign.com/qrouter/
-
-## magic 
-- http://opencircuitdesign.com/magic/
-
-## qflow
-- http://opencircuitdesign.com/qflow/
-
-# Install
+# Installation
 ## iverilog
 (mac)
 - ```$ brew install icarus-verilog```
 
 ### gtkwave for displaying waveform for iverilog output
 (mac)
-- ````$ sudo port install gtkwave```
+- ```$ sudo port install gtkwave```
 
 note. homebrew no longer supports gtkwave, use mac port instead
 
@@ -60,7 +49,7 @@ to /usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/
 - ```$ sudo nano /etc/ssh/sshd_config```
   - change `# X11Forwarding no` to `X11Forwarding yes`
 
-# Run
+# Execution
 ## iverilog 
 ### design file
 - write synthesizable code: design.v
