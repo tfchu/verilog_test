@@ -1,14 +1,40 @@
+# Design Flow
+- (Synthesis) verilog - *yosys* -> BLIF netlist - *yosys/abc* -> mapped BLIF netlist - *blifFanout* -> .cel input for placement
+- (Placement) (+).cel2 pin placement hints file - *graywolf* -> .pl1,.pl2,.pin placement results - *place2def* -> DEF file
+- (Routing) - *qrouter* -> annotated DEF file
+- (Display) - *magic* -> SPICE netlist .sim netlist GDS2 output
+
+# Tools
+## iverilog
+- http://iverilog.icarus.com/
+
+## yosys
+- https://github.com/cliffordwolf/yosys/blob/master/README.md
+
+## graywolf
+- https://github.com/rubund/graywolf
+
+## qrouter
+- http://opencircuitdesign.com/qrouter/
+
+## magic 
+- http://opencircuitdesign.com/magic/
+
+## qflow
+- http://opencircuitdesign.com/qflow/
+
 # Install
 ## iverilog
 (mac)
-$ brew install icarus-verilog
+- ```$ brew install icarus-verilog```
 
-### gtkwave
-- ```$ sudo port install gtkwave```
+### gtkwave for displaying waveform for iverilog output
+(mac)
+- ````$ sudo port install gtkwave```
 
 note. homebrew no longer supports gtkwave, use mac port instead
 
-## yosys (https://github.com/cliffordwolf/yosys/blob/master/README.md)
+## yosys
 - ```$ git clone https://github.com/cliffordwolf/yosys```
 - go to /yosys
 - ```$ brew tap Homebrew/bundle && brew bundle```
