@@ -49,6 +49,31 @@ to /usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/
 - ```$ sudo nano /etc/ssh/sshd_config```
   - change `# X11Forwarding no` to `X11Forwarding yes`
 
+## graywolf
+(mac)
+- ```git clone https://github.com/rubund/graywolf.git```
+- ```cmake .```
+  - note. require libgsl
+- ```make```
+- ```make install```
+
+### libgsl for graywolf
+(mac)
+- ```cd ~```
+- ```mkdir gsl```
+- ```wget ftp://ftp.gnu.org/gnu/gsl/gsl-2.4.tar.gz```
+- ```tar zxvf gsl-2.4.tar.gz```
+- ```cd gsl-2.4```
+- ```./configure --prefix=/Users/my_home/gsl```
+  - configure the installation
+- ```make```
+  - compile the library
+- ```make check```
+  - check and test the library
+- ```make install```
+  - install the library
+- use /installation/libgsl.c to test if the installation is good
+
 # Execution
 ## iverilog 
 ### design file
