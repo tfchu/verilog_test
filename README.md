@@ -1,8 +1,8 @@
 # Design Flow
-- (Synthesis) verilog - *yosys* -> BLIF netlist - *yosys/abc* -> mapped BLIF netlist - *blifFanout* -> .cel input for placement
-- (Placement) (+).cel2 pin placement hints file - *graywolf* -> .pl1,.pl2,.pin placement results - *place2def* -> DEF file
-- (Routing) - *qrouter* -> annotated DEF file
-- (Display) - *magic* -> SPICE netlist .sim netlist GDS2 output
+- (Synthesis) RTL - ***yosys*** -> BLIF netlist - ***yosys/abc*** -> mapped BLIF netlist - ***blifFanout*** -> .cel input for placement
+- (Placement) (+).cel2 pin placement hints file - ***graywolf*** -> .pl1,.pl2,.pin placement results - ***place2def*** -> DEF file
+- (Routing) - ***qrouter*** -> annotated DEF file
+- (Display) - ***magic*** -> SPICE netlist .sim netlist GDS2 output
 
 # Tools
 - [iverilog](http://iverilog.icarus.com/)
