@@ -1,17 +1,19 @@
 https://cmake.org/Wiki/CMake:How_To_Find_Libraries
 
 # External library already supported by CMake
-- `$ cmake --help-module-list  // list modules supported, same as looking into /usr/share/cmake/Modules/ (ubuntu)`
-- `$ cmake --help-module FindBZip2 // show a list of variabled of bzip2 library (module name FindBZip2.cmake)`
+- `$ cmake --help-module-list`
+  - list modules supported, same as looking into /usr/share/cmake/Modules/ (ubuntu)
+- `$ cmake --help-module FindBZip2`
+  - // show a list of variabled of bzip2 library (module name FindBZip2.cmake)
 
 # External library CMake does not have module for
 ## e.g. FindGSL.cmake
 - Note. cmake module name: FindSomething.cmake where Something is the library to use
 - download https://github.com/Kitware/CMake/blob/master/Modules/FindGSL.cmake
 - modify the code, add GSL root folder
-    GSL_ROOT_DIR = (path)
+```GSL_ROOT_DIR = (your_gsl_path)```
 - move the file under cmake/Modules
-- modify CMkaeLists.txt
+- modify CMakeLists.txt
 ```
 find_package(gsl REQUIRED)
 include_directories(${LibGSL++_INCLUDE_DIRS})
