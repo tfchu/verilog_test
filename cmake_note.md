@@ -1,4 +1,6 @@
 https://cmake.org/Wiki/CMake:How_To_Find_Libraries
+https://stackoverflow.com/questions/21047399/cmake-set-environment-variables-from-a-script
+https://www.cs.swarthmore.edu/~adanner/tips/cmake.php
 
 # External library already supported by CMake
 - `$ cmake --help-module-list`
@@ -10,10 +12,7 @@ https://cmake.org/Wiki/CMake:How_To_Find_Libraries
 # External library CMake does not have module for
 ## e.g. FindGSL.cmake
 - download https://github.com/Kitware/CMake/blob/master/Modules/FindGSL.cmake
-- modify the code, add GSL root folder
-```
-GSL_ROOT_DIR = (your_gsl_path)
-```
+  - note. need to use cmake to set environmental variable GSL_ROOT_DIR
 - move the file under cmake/Modules
 - modify CMakeLists.txt
 ```
@@ -26,3 +25,10 @@ target_link_libraries(exampleProgram ${LIBS})
 // if you put downloaded file under your project/cmake/Modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 ```
+- Set variable in command line
+  - `$ cmake -DGSL_ROOT_DIR=/Users/xxx/gsl`
+- Set variable in CMakeFileList.txt, add
+  - `set(GSL_ROOT_DIR, "/Users/xxx/gsl")`
+- Set environmental variable, e.g. PATH
+  - `set(ENV{PATH} "/Users/xxx:$ENV{PATH}")`
+
