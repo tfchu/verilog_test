@@ -53,9 +53,19 @@ to /usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/
 (mac)
 - ```git clone https://github.com/rubund/graywolf.git```
 - ```cmake .```
-  - note. require libgsl
+  - note. require cmake, which may or may not come with libgsl (required to build graywolf)
 - ```make```
 - ```make install```
+
+### cmake
+(mac)
+- download the source code `https://cmake.org/files/v3.9/cmake-3.9.4.tar.gz`
+- move the downloaded file to home dir
+- `$ cd ~`
+- `$ tar zxvf cmake-3.9.4.tar.gz`
+- `$ ./bootstrap`
+- `$ make`
+- `$ make install`
 
 ### libgsl for graywolf
 (mac)
@@ -73,6 +83,7 @@ to /usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/
 - ```make install```
   - install the library
 - use /installation/libgsl.c to test if the installation is good
+- how to include in cmake? 
 
 # Execution
 ## iverilog 
