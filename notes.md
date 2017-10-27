@@ -36,13 +36,14 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # GNU C Complier Options
 - Linking
-  - `-l*library*`: search the library named *library* when linking. `-L` includes several standard system directories and any specified. 
+  - -l*library*: search the library named *library* when linking. `-L` includes several standard system directories and any specified. 
 - Directory Search
-  - `-I*dir*`: Add the directory dir to the head of the list of directories to be searched for header files. 
-  - `-Ldir`: Add directory dir to the list of directories to be searched for `-l`.
+  - -I*dir*: Add the directory dir to the head of the list of directories to be searched for header files. 
+  - -Ldir: Add directory dir to the list of directories to be searched for `-l`.
 
-# pkg-config (https://people.freedesktop.org/~dbn/pkg-config-guide.html)
-``` Example: gsl.pc
+# [pkg-config](https://people.freedesktop.org/~dbn/pkg-config-guide.html)
+## Example: gsl.pc
+```
 prefix=/usr
 exec_prefix=/usr
 libdir=/usr/lib/x86_64-linux-gnu
@@ -58,7 +59,7 @@ Cflags: -I/usr/include
 - Libs: The link flags specific to this package and any required libraries that don't support pkg-config. 
 - Cflags: The compiler flags specific to this package and any required libraries that don't support pkg-config. 
 
-(mac)
+## Find GSL in mac
 - CMakeList.txt uses pkg-config to find gsl
 - `$ pkg-config --exists --print-errors gsl`
   - check if gsl exists. if not, error message is shown. 
