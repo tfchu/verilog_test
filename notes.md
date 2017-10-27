@@ -32,8 +32,32 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
   - `set(GSL_ROOT_DIR, "/Users/xxx/gsl")`
 - Set environmental variable, e.g. PATH
   - `set(ENV{PATH} "/Users/xxx:$ENV{PATH}")`
+  - `set(ENV{GSL_ROOT_DIR} "/Users/xxx/gsl")`
 
-# pkg-config
+# GNU C Complier Options
+- Linking
+  - `-l*library*`: search the library named *library* when linking. `-L` includes several standard system directories and any specified. 
+- Directory Search
+  - `-I*dir*`: Add the directory dir to the head of the list of directories to be searched for header files. 
+  - `-Ldir`: Add directory dir to the list of directories to be searched for `-l`.
+
+# pkg-config (https://people.freedesktop.org/~dbn/pkg-config-guide.html)
+``` Example: gsl.pc
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib/x86_64-linux-gnu
+includedir=/usr/include
+GSL_CBLAS_LIB=-lgslcblas
+
+Name: GSL
+Description: GNU Scientific Library
+Version: 2.1
+Libs: -L/usr/lib/x86_64-linux-gnu -lgsl ${GSL_CBLAS_LIB} -lm -lm 
+Cflags: -I/usr/include
+```
+- Libs: The link flags specific to this package and any required libraries that don't support pkg-config. 
+- Cflags: The compiler flags specific to this package and any required libraries that don't support pkg-config. 
+
 (mac)
 - CMakeList.txt uses pkg-config to find gsl
 - `$ pkg-config --exists --print-errors gsl`
@@ -43,4 +67,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
   - check where pkg-config stores the pc files
   - e.g. /opt/local/lib/pkgconfig:/opt/local/share/pkgconfig
 - copy `gsl.pc` from ubuntu to `/opt/local/lib/pkgconfig/`
-- run `pkg-config --exists --print-errors gsl` again to check if error is gone
+- run `$ pkg-config --exists --print-errors gsl` again to check if error is gone, or
+  - `$ pkg-config --exists gsl`
+  - `$ echo $?`
