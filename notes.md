@@ -36,11 +36,11 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 # pkg-config
 (mac)
 - CMakeList.txt uses pkg-config to find gsl
-- `pkg-config --exists --print-errors gsl`
+- `$ pkg-config --exists --print-errors gsl`
   - check if gsl exists. if not, error message is shown. 
 - copy `/usr/lib/x86_64-linux-gnu/pkgconfig/gsl.pc` from ubuntu
 - `$ pkg-config --variable pc_path pkg-config`
   - check where pkg-config stores the pc files
   - e.g. /opt/local/lib/pkgconfig:/opt/local/share/pkgconfig
-- copy `gsl.pc` from ubuntu to `/opt/local/lib/pkgconfig`
+- copy `gsl.pc` from ubuntu to `/opt/local/lib/pkgconfig/`
 - run `pkg-config --exists --print-errors gsl` again to check if error is gone
