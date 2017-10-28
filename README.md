@@ -115,3 +115,37 @@ to /usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/
   - show the synthesized result, (alternative) show -format ps -viewer gv
 
 note: fundamental building block (e.g. NOT gate) are called "cells". Rarely need to look into it. 
+
+## qflow
+### [tutorial](http://opencircuitdesign.com/qflow/tutorial.html)
+- `$ cd ~`
+- create and enter project folder, create required sub-folders
+  - `$ mkdir qflow_tutorial`
+  - `$ cd qflow_tutorial`
+  - `$ mkdir source synthesis layout`
+- download `map9v3.v` from tutorial page, copy to *source* folder
+- use qflow to synthesize, place and route the design file
+  - `$ qflow synthesize place route map9v3`, sh files created
+    - qflow_vars.sh
+    - qflow.exec.sh
+    - project_vars.sh
+- download `load.tcl` from tutorial page, copy to *layout* folder
+  - change *lef read /usr/local/share/qflow/...* to */usr/share/qflow/...*
+    - qflow v1.1 changed technology file path to */usr/share/qflow/tech/xxx*
+    - `$ cat layout/.magicrc` also shows the new path
+- use *magic* to add power rails (note. % means in *magic console*)
+  - `$ cd layout`
+  - `$ magic`
+    - `% source load.tcl`
+    - `% writeall force map9v3`
+    - Under *magic*, View/Full (or type 'v') to see the entire abstract cell view
+    - `% quit`
+- apply technology file
+  - download technology files [here](https://vlsiarch.ecen.okstate.edu/flows/MOSIS_SCMOS/osu_soc_v2.7/osu_soc_v2.7.tar.gz)
+  - create a folder and extract the files to the folder, e.g. *~/asic*
+  - edit *layout/.magicrc*, add
+    - addpath {technology folder}/asic
+  - go back to magic to view the physical layout of the technology
+    - `$ magic`
+      - `% gds read osu35_stdcells.gds2`
+      - 
