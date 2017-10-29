@@ -51,11 +51,16 @@ to /usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/
 
 ## graywolf
 (mac)
-- ```git clone https://github.com/rubund/graywolf.git```
-- ```cmake .```
+- `git clone https://github.com/rubund/graywolf.git`
+- tell cmake which compiler to use
+  - `$ export CC=/usr/local/Cellar/gcc\@5/5.5.0/bin/gcc-5`
+  - `$ export CXX=/usr/local/Cellar/gcc\@5/5.5.0/bin/g++-5`
+- `cmake .`
   - note. require cmake, which may or may not come with libgsl (required to build graywolf)
-- ```make```
-- ```make install```
+- add X11 header path to default search directory
+  - `$ ln -s /opt/local/include/X11 /usr/local/include/X11`
+- `make`
+- `make install`
 
 ### cmake
 (mac)
