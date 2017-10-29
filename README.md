@@ -32,7 +32,16 @@
   - `$ sudo apt install magic`
 - [qflow](http://opencircuitdesign.com/qflow/)
   - `$ sudo apt install qflow`
-
+- [netgen](http://opencircuitdesign.com/netgen/index.html)
+  - downdload the latest version [here](http://opencircuitdesign.com/netgen/archive/netgen-1.4.81.tgz)
+    - get prerequisites tcl-dev, tk-dec
+    - `$ sudo apt-cache search tcl` (tcl8.5-dev)
+    - `$ sudo apt install tcl8.5-dev`
+    - `$ sudo apt-cache search tk` (tk8.5-dev)
+    - `$ sudo apt install tk8.5-dev`
+  - `$ tar zxvf netgen-1.4.81.tgz`
+  - `$ cd netgen-1.4.81`
+  - `$ ./configure; make; sudo make install`
 # Execution
 ## iverilog 
 - design file
@@ -61,7 +70,7 @@
   - `yosys> opt`
 - show the synthesized result, (alternative) show -format ps -viewer gv  
 - `yosys> show`
-note: fundamental building block (e.g. NOT gate) are called "cells". Rarely need to look into it. 
+- note: fundamental building block (e.g. NOT gate) are called "cells". Rarely need to look into it. 
 
 ## [qflow tutorial](http://opencircuitdesign.com/qflow/tutorial.html)
 - `$ cd ~`
