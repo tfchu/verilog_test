@@ -51,7 +51,7 @@ Tool     | Usage
   - `$ sudo apt install magic`
 - [qflow](http://opencircuitdesign.com/qflow/)
   - `$ sudo apt install qflow`
-  - note. requires *yosys*, 
+  - note. requires *yosys*, *abc*, *graywolf*, *qrouter*, *magic*
 - [netgen](http://opencircuitdesign.com/netgen/index.html)
   - downdload the latest version [here](http://opencircuitdesign.com/netgen/archive/netgen-1.4.81.tgz)
     - get prerequisites tcl-dev, tk-dev
