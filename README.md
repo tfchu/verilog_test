@@ -8,20 +8,20 @@
 Tool     | Usage
 ---------|--------------
 [iverilog](http://iverilog.icarus.com/) | Verilog simulation and synthesis tool
-yosys    | Verilog parser, high-level synthesis, and logic optimization and verification
-abc      | Logic optimization
-graywolf | Placement
-qrouter* | Over-the-cell (sea-of-gates) detail router
-magic*   | VLSI layout editor, extraction, and DRC tool
-qflow*   | a framework for managing a digital synthesis flow using open-source software and open-source standard cell libraries
-netgen*  | Circuit netlist comparison (LVS) and netlist conversion tool (LVS: Layout vs Schematics)
-XCircuit*| Circuit drawing and schematic capture tool
-IRSIM*   | Switch-level digital circuit simulator
-PCB*     | Printed circuit board layout editor
-Opentimer| STA (static timing analysis) tool
-ngSPICE  | mixed-level/mixed-signal circuit simulator
-eSIM     | EDA tool for circuit design, simulation, analysis and PCB design
-- *OCD (open-circuit-design software)
+[yosys](https://github.com/cliffordwolf/yosys/blob/master/README.md) | Verilog parser, high-level synthesis, logic optimization and verification
+[abc](https://people.eecs.berkeley.edu/~alanmi/abc/abc.htm) | Logic optimization
+[graywolf](https://github.com/rubund/graywolf) | Placement
+[qrouter](http://opencircuitdesign.com/qrouter/)* | Over-the-cell (sea-of-gates) detail router
+[magic](http://opencircuitdesign.com/magic/)* | VLSI layout editor, extraction, and DRC tool
+[qflow](http://opencircuitdesign.com/qflow/)* | a framework for managing a digital synthesis flow using open-source software and open-source standard cell libraries
+[netgen](http://opencircuitdesign.com/netgen/index.html)* | Circuit netlist comparison (LVS) and netlist conversion tool (LVS: Layout vs Schematics)
+[XCircuit](http://opencircuitdesign.com/xcircuit/index.html)* | Circuit drawing and schematic capture tool
+[IRSIM](http://opencircuitdesign.com/irsim/index.html)* | Switch-level digital circuit simulator
+[PCB](http://opencircuitdesign.com/pcb/index.html)* | Printed circuit board layout editor
+[Opentimer](http://thuang19.web.engr.illinois.edu/software/timer/OpenTimer.html) | STA (static timing analysis) tool
+[ngSPICE](http://ngspice.sourceforge.net/) | mixed-level/mixed-signal circuit simulator
+[eSIM](http://esim.fossee.in/) | EDA tool for circuit design, simulation, analysis and PCB design
+- *OCD (open-circuit-design) software
 
 # Tool Installation (Ubuntu)
 - [iverilog](http://iverilog.icarus.com/)
