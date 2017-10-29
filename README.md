@@ -5,8 +5,9 @@
 - (Display) - ***magic*** -> SPICE netlist .sim netlist GDS2 output
 
 # Tools Intro
-iverilog | Usage
+Tool     | Usage
 ---------|--------------
+iverilog | Verilog simulation and synthesis tool
 yosys    | Verilog parser, high-level synthesis, and logic optimization and verification
 abc      | Logic optimization
 graywolf | Placement
