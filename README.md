@@ -4,125 +4,66 @@
 - (Routing) - ***qrouter*** -> annotated DEF file
 - (Display) - ***magic*** -> SPICE netlist .sim netlist GDS2 output
 
-# Tools
+# Tool Installation (Ubuntu)
 - [iverilog](http://iverilog.icarus.com/)
+  - `$ sudo apt install iverilog`
 - [yosys](https://github.com/cliffordwolf/yosys/blob/master/README.md)
+  - method 1: use apt install
+    - `$ sudo add-apt-repository ppa:saltmakrell/ppa`
+		- `$ sudo apt update`                                                     
+	  - `$ sudo apt install yosys`
+  - method 2: compile from source
+    - `$ sudo apt-get install build-essential clang bison flex libreadline-dev gawk tcl-dev libffi-dev git mercurial graphviz xdot pkg-config python3`
+    - `$ git clone https://github.com/cliffordwolf/yosys`
+    - `$ cd yosys`
+    - `$ make config-gcc`
+    - `$ make`
+    - `$ make test`
+    - `$ sudo make install`
 - [graywolf](https://github.com/rubund/graywolf)
+  - `$ git clone https://github.com/rubund/graywolf.git`
+  - `$ cd graywolf`
+  - `$ cmake .`
+  - `$ make`
+  - `$ make install`
 - [qrouter](http://opencircuitdesign.com/qrouter/)
+  - `$ sudo apt install qrouter`
 - [magic](http://opencircuitdesign.com/magic/)
+  - `$ sudo apt install magic`
 - [qflow](http://opencircuitdesign.com/qflow/)
-
-# Installation
-## iverilog
-(mac)
-- ```$ brew install icarus-verilog```
-
-### gtkwave for displaying waveform for iverilog output
-(mac)
-- ```$ sudo port install gtkwave```
-
-note. homebrew no longer supports gtkwave, use mac port instead
-
-## yosys
-- ```$ git clone https://github.com/cliffordwolf/yosys```
-- go to /yosys
-- ```$ brew tap Homebrew/bundle && brew bundle```
-- ```$ make config-clang```
-- ```$ make```
-- ```$ make test```
-- ```$ sudo make install```
-
-### xdot for yosys
-(mac)
-- ```$ brew install xdot```
-- copy xdot.py & xdot.pyc for Python2.7 from ubuntu (brew gets these two files for Python3)
-to /usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/
-
-### gtk+3
-(mac)
-- ```$ brew install gtk+3```
-
-### gv for yosys (optional, if xdot does not work)
-(mac)
-- ```$ brew cask reinstall xquartz```
-- ```$ brew install gv```
-- ```$ sudo nano /etc/ssh/sshd_config```
-  - change `# X11Forwarding no` to `X11Forwarding yes`
-
-## graywolf
-(mac)
-- `git clone https://github.com/rubund/graywolf.git`
-- tell cmake which compiler to use
-  - `$ export CC=/usr/local/Cellar/gcc\@5/5.5.0/bin/gcc-5`
-  - `$ export CXX=/usr/local/Cellar/gcc\@5/5.5.0/bin/g++-5`
-- `cmake .`
-  - note. require cmake, which may or may not come with libgsl (required to build graywolf)
-- add X11 header path to default search directory
-  - `$ ln -s /opt/local/include/X11 /usr/local/include/X11`
-- `make`
-- `make install`
-
-### cmake
-(mac)
-- download the source code `https://cmake.org/files/v3.9/cmake-3.9.4.tar.gz`
-- move the downloaded file to home dir
-- `$ cd ~`
-- `$ tar zxvf cmake-3.9.4.tar.gz`
-- `$ ./bootstrap`
-- `$ make`
-- `$ make install`
-
-### libgsl for graywolf
-(mac)
-- ```cd ~```
-- ```mkdir gsl```
-- ```wget ftp://ftp.gnu.org/gnu/gsl/gsl-2.4.tar.gz```
-- ```tar zxvf gsl-2.4.tar.gz```
-- ```cd gsl-2.4```
-- ```./configure --prefix=/Users/my_home/gsl```
-  - configure the installation
-- ```make```
-  - compile the library
-- ```make check```
-  - check and test the library
-- ```make install```
-  - install the library
-- use /installation/libgsl.c to test if the installation is good
-- how to include in cmake? 
+  - `$ sudo apt install qflow`
 
 # Execution
 ## iverilog 
-### design file
-- write synthesizable code: design.v
-- ```$iverilog -o design design.v```
+- design file
+  - write synthesizable code: design.v
   - compile the code
-- ```vvp design```
+    - `$ iverilog -o design design.v`
   - execute the code
+    - `vvp design`
 
-### test bench (check RTL design)
-- write synthesizable code: design.v
-- write testbench code: testbench.sv
-- ```$ iverilog -o testbench.vvp testbench.sv```
+- test bench (check RTL design)
+  - write synthesizable code: design.v
+  - write testbench code: testbench.sv
   - compile (creates vvp file), design.v is used inside testbench hence not called
-- ```$ vvp testbench.vvp```
+  - `$ iverilog -o testbench.vvp testbench.sv`
   - run vvp (creates vcd file)
-- ```$ gtkwave dump.vcd```
+    - `$ vvp testbench.vvp`
   - open vcd, then select signal and append
+    - `$ gtkwave dump.vcd`
 
 ## yosys (logic sythesize)
-- ```$ yosys```
-- ```yosys> read_verilog design.v```
-- ```yosys> techmap```
-  - map the design to default technology
-- ```yosys> opt```
-  - optimize the design
-- ```yosys> show```
-  - show the synthesized result, (alternative) show -format ps -viewer gv
-
+- `$ yosys`
+- `yosys> read_verilog design.v`
+- map the design to default technology
+  - `yosys> techmap`
+- optimize the design
+  - `yosys> opt`
+- show the synthesized result, (alternative) show -format ps -viewer gv  
+- `yosys> show`
 note: fundamental building block (e.g. NOT gate) are called "cells". Rarely need to look into it. 
 
-## qflow
-### [tutorial](http://opencircuitdesign.com/qflow/tutorial.html)
+## [qflow tutorial](http://opencircuitdesign.com/qflow/tutorial.html)
 - `$ cd ~`
 - create and enter project folder, create required sub-folders
   - `$ mkdir qflow_tutorial`
@@ -153,4 +94,64 @@ note: fundamental building block (e.g. NOT gate) are called "cells". Rarely need
   - go back to magic to view the physical layout of the technology
     - `$ magic`
       - `% gds read osu35_stdcells.gds2`
-      - 
+
+# Appendix
+## Tool Installation (Mac)
+- [iverilog](http://iverilog.icarus.com/)
+  - (mac) `$ brew install icarus-verilog`
+  - gtkwave: *displaying vcd (value change dump) for iverilog output*
+    - (linux) `$ sudo apt install gtkwave`
+    - (mac) `$ sudo port install gtkwave`
+- [yosys](https://github.com/cliffordwolf/yosys/blob/master/README.md)
+  - `$ git clone https://github.com/cliffordwolf/yosys`
+  - `$ cd yosys`
+  - `$ brew tap Homebrew/bundle && brew bundle`
+  - `$ make config-clang`
+  - `$ make`
+  - `$ make test`
+  - `$ sudo make install`
+  - xdot & gtk3 (for xdot)
+    - `$ brew install xdot`
+    - copy *xdot.py* & *xdot.pyc* for Python2.7 from ubuntu (brew gets these two files for Python3)
+    to */usr/local/Cellar/xdot/0.7_1/libexec/lib/python2.7/site-packages/*
+    - `$ brew install gtk+3`
+  - gv for yosys (optional, if xdot does not work)
+    - `$ brew cask reinstall xquartz`
+    - `$ brew install gv`
+    - `$ sudo nano /etc/ssh/sshd_config`
+      - change *# X11Forwarding no* to *X11Forwarding yes*
+- [graywolf](https://github.com/rubund/graywolf)
+  - `git clone https://github.com/rubund/graywolf.git`
+  - tell cmake which compiler to use
+    - `$ export CC=/usr/local/Cellar/gcc\@5/5.5.0/bin/gcc-5`
+    - `$ export CXX=/usr/local/Cellar/gcc\@5/5.5.0/bin/g++-5`
+  - `cmake .`
+    - note. require cmake, which may or may not come with libgsl (required to build graywolf)
+  - add X11 header path to default search directory
+    - `$ ln -s /opt/local/include/X11 /usr/local/include/X11`
+  - `make` (error occurs here)
+  - `make install`
+- other tools
+  - cmake (for graywolf)
+    - download the source code `https://cmake.org/files/v3.9/cmake-3.9.4.tar.gz`
+    - move the downloaded file to home dir
+    - `$ cd ~`
+    - `$ tar zxvf cmake-3.9.4.tar.gz`
+    - `$ ./bootstrap`
+    - `$ make`
+    - `$ make install`
+  - libgsl (for graywolf)
+    - ```cd ~```
+    - ```mkdir gsl```
+    - ```wget ftp://ftp.gnu.org/gnu/gsl/gsl-2.4.tar.gz```
+    - ```tar zxvf gsl-2.4.tar.gz```
+    - ```cd gsl-2.4```
+    - ```./configure --prefix=/Users/my_home/gsl```
+      - configure the installation
+    - ```make```
+      - compile the library
+    - ```make check```
+      - check and test the library
+    - ```make install```
+      - install the library
+    - use /installation/libgsl.c to test if the installation is good
