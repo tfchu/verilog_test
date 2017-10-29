@@ -4,6 +4,19 @@
 - (Routing) - ***qrouter*** -> annotated DEF file
 - (Display) - ***magic*** -> SPICE netlist .sim netlist GDS2 output
 
+# Tools Intro
+iverilog | Usage
+---------|--------
+yosys    | Verilog parser, high-level synthesis, and logic optimization and verification
+abc      | Logic optimization
+graywolf | Placement
+qrouter  | Over-the-cell (sea-of-gates) detail router
+magic    | VLSI layout editor, extraction, and DRC tool
+qflow    | a framework for managing a digital synthesis flow using open-source software and open-source standard cell libraries
+netgen   | Circuit netlist comparison (LVS) and netlist conversion tool (LVS: Layout vs Schematics)
+XCircuit | Circuit drawing and schematic capture tool
+IRSIM    | Switch-level digital circuit simulator
+
 # Tool Installation (Ubuntu)
 - [iverilog](http://iverilog.icarus.com/)
   - `$ sudo apt install iverilog`
@@ -32,6 +45,7 @@
   - `$ sudo apt install magic`
 - [qflow](http://opencircuitdesign.com/qflow/)
   - `$ sudo apt install qflow`
+  - note. requires *yosys*, 
 - [netgen](http://opencircuitdesign.com/netgen/index.html)
   - downdload the latest version [here](http://opencircuitdesign.com/netgen/archive/netgen-1.4.81.tgz)
     - get prerequisites tcl-dev, tk-dev
