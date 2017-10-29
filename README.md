@@ -7,7 +7,7 @@
 # Tools Intro
 Tool     | Usage
 ---------|--------------
-iverilog | Verilog simulation and synthesis tool
+[iverilog](http://iverilog.icarus.com/) | Verilog simulation and synthesis tool
 yosys    | Verilog parser, high-level synthesis, and logic optimization and verification
 abc      | Logic optimization
 graywolf | Placement
@@ -18,6 +18,9 @@ netgen*  | Circuit netlist comparison (LVS) and netlist conversion tool (LVS: La
 XCircuit*| Circuit drawing and schematic capture tool
 IRSIM*   | Switch-level digital circuit simulator
 PCB*     | Printed circuit board layout editor
+Opentimer| STA (static timing analysis) tool
+ngSPICE  | mixed-level/mixed-signal circuit simulator
+eSIM     | EDA tool for circuit design, simulation, analysis and PCB design
 - *OCD (open-circuit-design software)
 
 # Tool Installation (Ubuntu)
