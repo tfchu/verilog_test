@@ -5,17 +5,18 @@
 - (Display) - ***magic*** -> SPICE netlist .sim netlist GDS2 output
 
 # Tools Intro
-iverilog | Usage
----------|--------
-yosys    | Verilog parser, high-level synthesis, and logic optimization and verification
-abc      | Logic optimization
-graywolf | Placement
-qrouter  | Over-the-cell (sea-of-gates) detail router
-magic    | VLSI layout editor, extraction, and DRC tool
-qflow    | a framework for managing a digital synthesis flow using open-source software and open-source standard cell libraries
-netgen   | Circuit netlist comparison (LVS) and netlist conversion tool (LVS: Layout vs Schematics)
-XCircuit | Circuit drawing and schematic capture tool
-IRSIM    | Switch-level digital circuit simulator
+iverilog      | Usage
+--------------|--------------
+yosys         | Verilog parser, high-level synthesis, and logic optimization and verification
+abc           | Logic optimization
+graywolf      | Placement
+qrouter (OCD) | Over-the-cell (sea-of-gates) detail router
+magic (OCD)   | VLSI layout editor, extraction, and DRC tool
+qflow (OCD)   | a framework for managing a digital synthesis flow using open-source software and open-source standard cell libraries
+netgen (OCD)  | Circuit netlist comparison (LVS) and netlist conversion tool (LVS: Layout vs Schematics)
+XCircuit (OCD)| Circuit drawing and schematic capture tool
+IRSIM (OCD)   | Switch-level digital circuit simulator
+PCB (OCD)     | Printed circuit board layout editor
 
 # Tool Installation (Ubuntu)
 - [iverilog](http://iverilog.icarus.com/)
