@@ -1,0 +1,174 @@
+- my_transaction tran; 
+    - tran is not accecpted, trans is ok, not sure why?? 
+- where to add #(my_transaction)
+    - summary
+        - sequence, sequencer, driver, uvm_analysis_port declaration
+    - class my_sequence extends uvm_sequence#(my_transaction)
+    - class my_driver extends uvm_driver#(my_transaction)
+        - if not, errors "Incompatible complex type usage" for 
+        seq_item_port.get_next_item(trans);
+        drvr.seq_item_port.connect(seqr.seq_item_export);
+    - uvm_analysis_port#(my_transaction) ap; 
+    - class my_subscriber extends uvm_subscriber#(my_transaction);
+    - uvm_sequencer#(my_transaction) seqr;  // or class my_sequencer extends uvm_sequencer#(my_transaction);
+        - seqr = uvm_sequencer#(my_transaction)::type_id::create("seqr", this);
+- where to add virtual my_if
+    - virtual my_if vif;    // in classes
+    - uvm_config_db#(virtual my_if)::get(this, "", "vif", vif)
+    - uvm_config_db#(virtual my_if)::set(uvm_root::get(), "*", "vif", vif);
+- drive/monitor forever and sequence repeat(x)
+    forever begin ... end in driver and monitor to driver/monitor forever, otherwise only once
+    repeat(x) in sequence, so that sequence item is sent to sequencer x time (driver can get x items)
+- when does simulation stop? 
+    - when sequence ends (after repeat x times) as sequence.start(seqr) is the top-level call, even though driver/monitor has forever
+    - i.e. if driver gets only 1 item from sequencer FIFO (9 more in sequencer FIFO), simulation never ends
+    - call flow
+        - sequence.start(seqr) -> sequence body() -> start|start_item|finish_item -> sequencer FIFO -> driver get_next_item()|item_done()
+    - this example adds #100 after starting the sequence. after 10-th transaction (@95), monitor/dut continues to work on posedge clk (until @195)
+- seq_item_port.item_done(trans) vs seq_item_port.item_done()
+    - seq_item_port.item_done(trans)
+        - response handle is passed, sequence needs to implement get_response(rsp), see driver get(), put()
+            start_item(trans);
+            ...
+            finish_item(trans);
+            get_response(trans);    // added
+        - otherwise Response queue overflow, response was dropped error is shown (default queue depth is 8, use set_response_queue_depth to change)
+        - https://verificationacademy.com/forums/ovm/response-queue-overflow-error-0
+    - seq_item_port.item_done(): null handle is passed, response queue will not overflow
+- driver get_next_item before/after clk edge
+    @(posedge vif.clk);
+    seq_item_port.get_next_item(trans);
+    - after: subscriber print -> dut print -> driver print
+    - before: subscriber print -> driver print -> dut print
+- don't forget to start my_sequence
+    - e.g. seq.start(seqr); in test
+
+
+- output
+UVM_INFO @ 0: reporter [RNTST] Running test my_test...
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_root.svh(589) @ 0: reporter [UVMTOP] UVM testbench topology:
+--------------------------------------------------------------
+Name                       Type                    Size  Value
+--------------------------------------------------------------
+uvm_test_top               my_test                 -     @341 
+  env                      my_env                  -     @354 
+    agnt                   my_agent                -     @363 
+      ap                   uvm_analysis_export     -     @567 
+      drvr                 my_driver               -     @538 
+        rsp_port           uvm_analysis_port       -     @557 
+        seq_item_port      uvm_seq_item_pull_port  -     @547 
+      mon                  my_monitor              -     @529 
+        ap                 uvm_analysis_port       -     @578 
+      seqr                 uvm_sequencer           -     @392 
+        rsp_export         uvm_analysis_export     -     @401 
+        seq_item_export    uvm_seq_item_pull_imp   -     @519 
+        arbitration_queue  array                   0     -    
+        lock_queue         array                   0     -    
+        num_last_reqs      integral                32    'd1  
+        num_last_rsps      integral                32    'd1  
+    sbsc                   my_subscriber           -     @372 
+      analysis_imp         uvm_analysis_imp        -     @381 
+--------------------------------------------------------------
+
+UVM_INFO testbench.sv(119) @ 5: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 5: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=0
+[dut] @                    5: addr= x
+[dut] @                    5: data=x
+UVM_INFO testbench.sv(70) @ 5: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=11        // item 1
+UVM_INFO testbench.sv(71) @ 5: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=0
+UVM_INFO testbench.sv(119) @ 15: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=11
+UVM_INFO testbench.sv(120) @ 15: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=0
+[dut] @                   15: addr=11
+[dut] @                   15: data=0
+UVM_INFO testbench.sv(70) @ 15: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr= 2       // item 2
+UVM_INFO testbench.sv(71) @ 15: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=0
+UVM_INFO testbench.sv(119) @ 25: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 2
+UVM_INFO testbench.sv(120) @ 25: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=0
+[dut] @                   25: addr= 2
+[dut] @                   25: data=0
+UVM_INFO testbench.sv(70) @ 25: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr= 0       // item 3
+UVM_INFO testbench.sv(71) @ 25: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=1
+UVM_INFO testbench.sv(119) @ 35: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 35: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                   35: addr= 0
+[dut] @                   35: data=1
+UVM_INFO testbench.sv(70) @ 35: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr= 8       // item 4
+UVM_INFO testbench.sv(71) @ 35: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=1
+UVM_INFO testbench.sv(119) @ 45: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 8
+UVM_INFO testbench.sv(120) @ 45: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                   45: addr= 8
+[dut] @                   45: data=1
+UVM_INFO testbench.sv(70) @ 45: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr= 3       // item 5
+UVM_INFO testbench.sv(71) @ 45: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=2
+UVM_INFO testbench.sv(119) @ 55: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 3
+UVM_INFO testbench.sv(120) @ 55: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=2
+[dut] @                   55: addr= 3
+[dut] @                   55: data=2
+UVM_INFO testbench.sv(70) @ 55: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr= 1       // item 6
+UVM_INFO testbench.sv(71) @ 55: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=0
+UVM_INFO testbench.sv(119) @ 65: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 1
+UVM_INFO testbench.sv(120) @ 65: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=0
+[dut] @                   65: addr= 1
+[dut] @                   65: data=0
+UVM_INFO testbench.sv(70) @ 65: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr= 3       // item 7
+UVM_INFO testbench.sv(71) @ 65: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=0
+UVM_INFO testbench.sv(119) @ 75: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 3
+UVM_INFO testbench.sv(120) @ 75: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=0
+[dut] @                   75: addr= 3
+[dut] @                   75: data=0
+UVM_INFO testbench.sv(70) @ 75: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr= 7       // item 8
+UVM_INFO testbench.sv(71) @ 75: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=3
+UVM_INFO testbench.sv(119) @ 85: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 7
+UVM_INFO testbench.sv(120) @ 85: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                   85: addr= 7
+[dut] @                   85: data=3
+UVM_INFO testbench.sv(70) @ 85: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr= 1       // item 9
+UVM_INFO testbench.sv(71) @ 85: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=3
+UVM_INFO testbench.sv(119) @ 95: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 1
+UVM_INFO testbench.sv(120) @ 95: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                   95: addr= 1
+[dut] @                   95: data=3
+UVM_INFO testbench.sv(70) @ 95: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr= 0       // item 10 (last due to repeat(10) in sequence)
+UVM_INFO testbench.sv(71) @ 95: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=3
+UVM_INFO testbench.sv(119) @ 105: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 105: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  105: addr= 0
+[dut] @                  105: data=3
+UVM_INFO testbench.sv(119) @ 115: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 115: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  115: addr= 0
+[dut] @                  115: data=3
+UVM_INFO testbench.sv(119) @ 125: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 125: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  125: addr= 0
+[dut] @                  125: data=3
+UVM_INFO testbench.sv(119) @ 135: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 135: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  135: addr= 0
+[dut] @                  135: data=3
+UVM_INFO testbench.sv(119) @ 145: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 145: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  145: addr= 0
+[dut] @                  145: data=3
+UVM_INFO testbench.sv(119) @ 155: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 155: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  155: addr= 0
+[dut] @                  155: data=3
+UVM_INFO testbench.sv(119) @ 165: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 165: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  165: addr= 0
+[dut] @                  165: data=3
+UVM_INFO testbench.sv(119) @ 175: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 175: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  175: addr= 0
+[dut] @                  175: data=3
+UVM_INFO testbench.sv(119) @ 185: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 185: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  185: addr= 0
+[dut] @                  185: data=3
+UVM_INFO testbench.sv(119) @ 195: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr= 0
+UVM_INFO testbench.sv(120) @ 195: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                  195: addr= 0
+[dut] @                  195: data=3
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_objection.svh(1276) @ 195: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_report_server.svh(904) @ 195: reporter [UVM/REPORT/SERVER] 

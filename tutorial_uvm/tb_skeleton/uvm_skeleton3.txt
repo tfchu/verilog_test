@@ -1,0 +1,128 @@
+// output
+UVM_INFO @ 0: reporter [RNTST] Running test my_test...
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_root.svh(589) @ 0: reporter [UVMTOP] UVM testbench topology:
+--------------------------------------------------------------
+Name                       Type                    Size  Value
+--------------------------------------------------------------
+uvm_test_top               my_test                 -     @341 
+  env                      my_env                  -     @354 
+    agnt                   my_agent                -     @363 
+      ap                   uvm_analysis_export     -     @567 
+      drvr                 my_driver               -     @538 
+        rsp_port           uvm_analysis_port       -     @557 
+        seq_item_port      uvm_seq_item_pull_port  -     @547 
+      mon                  my_monitor              -     @529 
+        ap                 uvm_analysis_port       -     @578 
+      seqr                 uvm_sequencer           -     @392 
+        rsp_export         uvm_analysis_export     -     @401 
+        seq_item_export    uvm_seq_item_pull_imp   -     @519 
+        arbitration_queue  array                   0     -    
+        lock_queue         array                   0     -    
+        num_last_reqs      integral                32    'd1  
+        num_last_rsps      integral                32    'd1  
+    sbsc                   my_subscriber           -     @372 
+      analysis_imp         uvm_analysis_imp        -     @381 
+--------------------------------------------------------------
+
+UVM_INFO testbench.sv(151) @ 5: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=0
+UVM_INFO testbench.sv(152) @ 5: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=0
+[dut] @                    5: addr=x
+[dut] @                    5: data=x
+UVM_INFO testbench.sv(99) @ 5: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=6
+UVM_INFO testbench.sv(100) @ 5: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=0
+UVM_INFO testbench.sv(151) @ 15: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=6
+UVM_INFO testbench.sv(152) @ 15: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=0
+[dut] @                   15: addr=6
+[dut] @                   15: data=0
+UVM_INFO testbench.sv(99) @ 15: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=7
+UVM_INFO testbench.sv(100) @ 15: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=3
+UVM_INFO testbench.sv(151) @ 25: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=7
+UVM_INFO testbench.sv(152) @ 25: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                   25: addr=7
+[dut] @                   25: data=3
+UVM_INFO testbench.sv(99) @ 25: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=0
+UVM_INFO testbench.sv(100) @ 25: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=0
+UVM_INFO testbench.sv(151) @ 35: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=0
+UVM_INFO testbench.sv(152) @ 35: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=0
+[dut] @                   35: addr=0
+[dut] @                   35: data=0
+UVM_INFO testbench.sv(99) @ 35: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=2
+UVM_INFO testbench.sv(100) @ 35: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=3
+UVM_INFO testbench.sv(151) @ 45: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=2
+UVM_INFO testbench.sv(152) @ 45: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                   45: addr=2
+[dut] @                   45: data=3
+UVM_INFO testbench.sv(99) @ 45: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=7
+UVM_INFO testbench.sv(100) @ 45: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=3
+UVM_INFO testbench.sv(151) @ 55: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=7
+UVM_INFO testbench.sv(152) @ 55: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                   55: addr=7
+[dut] @                   55: data=3
+UVM_INFO testbench.sv(99) @ 55: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=5
+UVM_INFO testbench.sv(100) @ 55: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=1
+UVM_INFO testbench.sv(151) @ 65: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 65: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                   65: addr=5
+[dut] @                   65: data=1
+UVM_INFO testbench.sv(99) @ 65: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=2
+UVM_INFO testbench.sv(100) @ 65: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=1
+UVM_INFO testbench.sv(151) @ 75: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=2
+UVM_INFO testbench.sv(152) @ 75: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                   75: addr=2
+[dut] @                   75: data=1
+UVM_INFO testbench.sv(99) @ 75: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=3
+UVM_INFO testbench.sv(100) @ 75: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=1
+UVM_INFO testbench.sv(151) @ 85: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=3
+UVM_INFO testbench.sv(152) @ 85: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                   85: addr=3
+[dut] @                   85: data=1
+UVM_INFO testbench.sv(99) @ 85: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=4
+UVM_INFO testbench.sv(100) @ 85: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=3
+UVM_INFO testbench.sv(151) @ 95: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=4
+UVM_INFO testbench.sv(152) @ 95: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=3
+[dut] @                   95: addr=4
+[dut] @                   95: data=3
+UVM_INFO testbench.sv(99) @ 95: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.addr=5
+UVM_INFO testbench.sv(100) @ 95: uvm_test_top.env.agnt.drvr [uvm_test_top.env.agnt.drvr] trans.data=1
+UVM_INFO testbench.sv(151) @ 105: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 105: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  105: addr=5
+[dut] @                  105: data=1
+UVM_INFO testbench.sv(151) @ 115: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 115: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  115: addr=5
+[dut] @                  115: data=1
+UVM_INFO testbench.sv(151) @ 125: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 125: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  125: addr=5
+[dut] @                  125: data=1
+UVM_INFO testbench.sv(151) @ 135: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 135: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  135: addr=5
+[dut] @                  135: data=1
+UVM_INFO testbench.sv(151) @ 145: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 145: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  145: addr=5
+[dut] @                  145: data=1
+UVM_INFO testbench.sv(151) @ 155: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 155: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  155: addr=5
+[dut] @                  155: data=1
+UVM_INFO testbench.sv(151) @ 165: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 165: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  165: addr=5
+[dut] @                  165: data=1
+UVM_INFO testbench.sv(151) @ 175: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 175: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  175: addr=5
+[dut] @                  175: data=1
+UVM_INFO testbench.sv(151) @ 185: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 185: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  185: addr=5
+[dut] @                  185: data=1
+UVM_INFO testbench.sv(151) @ 195: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.addr=5
+UVM_INFO testbench.sv(152) @ 195: uvm_test_top.env.sbsc [uvm_test_top.env.sbsc] trans.data=1
+[dut] @                  195: addr=5
+[dut] @                  195: data=1
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_objection.svh(1276) @ 195: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO /apps/vcsmx/vcs/S-2021.09//etc/uvm-1.2/src/base/uvm_report_server.svh(904) @ 195: reporter [UVM/REPORT/SERVER] 

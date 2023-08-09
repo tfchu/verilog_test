@@ -1,0 +1,12 @@
+call hierarchy
+
+testbench_top.sv (module tb_top;)
+    interface.sv (interface reg_if (input bit clk);)
+    test.sv (class test;)
+        environment.sv (class env;)
+            driver.sv (class driver;)
+            monitor.sv (class monitor;)
+            scoreboard.sv (class scoreboard;)
+            interface.sv (interface reg_if (input bit clk);)
+        transaction.sv (class reg_item;)
+

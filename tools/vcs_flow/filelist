@@ -1,0 +1,44 @@
+/*
+this file (argument file) contains a list of absolute pathnames for Verilog source files and compile-time options
+
+<file.v|file.sv>: 
+    verilog/systemverilog source file to compile, simply write the file path (absolute path can be used)
+-f: 
+    specify the argument file, e.g. $ vlogan|vcs -f filelist
+    see also -F, -file
++incdir+<dir>: 
+    the directories that contain verilog/systemverilog sources that is `include in source files (module, .v, .sv)
+    e.g. 
+    /path/to/tests/test_list.sv     // a low-level source file that contains the files to include
+        `include "test1.sv" 
+        `include "test2.sv"
+        ...
+    /path/to/tb.f                   // top level argument file (like this file "filelist")
+        +incdir+/path/to/tests      // include test_list.sv, which contains all the sources with `include
+    during VCS analysis step
+        $ vlogan ... -file /path/to/tb.f    // generate a library to be elaborated/compiled later with "vcs" command
+
+summary
+- we start with an default top-level argument file, e.g. /path/to/arg.f
+    - we do analysis step with $ vlogan ... -file /path/to/arg.f
+- we include a source file in our testbench to use its library, e.g. `include /path/to/lib/test1.sv
+- then in /path/to/arg.f, we include the path to test1.sv with +incdir+/path/to/lib
+- many library files can locate in /path/to/lib/
+ */
+
+/*
+in this examples, simply compile with 
+    $ vcs -o mux2_1 -Mupdate -f filelist
+
+and run simulation with
+    $ ./mux2_1
+
+following files are generated besides the .v files after compilation
+d csrc              // new directory
+- mux2_1            // executable for simulation
+d mux2_1.daidir     // new directory
+*/
+
+// we simply specify files to compile here
+mux2_1_tb.v
+mux2_1.v

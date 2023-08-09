@@ -1,0 +1,36 @@
+source
+https://verificationguide.com/systemverilog-examples/systemverilog-testbench-example-adder-2/
+https://verificationguide.com/systemverilog-examples/systemverilog-testbench-example-with-scb/
+
+build sequence
+- transaction
+- generator
+- interface
+- driver
+- environment
+- test
+- testbench_top
+
+hierarchy
+
+testbench_top                       // top-level tb. inst. I/F with port list, inst. test with I/F, inst. DUT with I/F port/signals
+    interface                       // used to connect to DUT, port: clk, reset, signals: a, b, c, valid
+    test                            // represent a test (tb can start multiple tests), inst. environment with I/F. configure generator and run test (run() task) thru environment
+        environment                 // contain generator/transaction/driver/scoreboard/monitor, and mailbox, I/F. inst. generator/driver and call their tasks. provide run() task to run the test.
+            generator               // pattern generator thru randomizing transaction, provide mailbox to send IPC (with transaction) to driver when randomizing completes
+                transaction         // provide key DUT input (rand) and output signals to use, e.g. a, b, c
+                mailbox
+                event
+            driver                  // drive I/F signals (e.g. a, b, c) from generator. also provide other misc tasks, e.g. reset (I/F)
+                interface
+                mailbox
+            monitor                 // monitor the transaction (get I/F to transaction), the reverse of driver (send transaction to I/F)
+                interface
+                mailbox
+                transaction
+            scoreboard              // check if results meet expectation. get signal values from monitor, and check in scoreboard. report error if found. 
+                mailbox
+                transaction
+            mailbox
+            interface
+    design_adder                    // connect DUT, interface
