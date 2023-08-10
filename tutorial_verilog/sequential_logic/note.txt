@@ -1,0 +1,4 @@
+sequential logic e.g. 
+- latch: SR latch, D latch
+- flipflop: D ff, JK ff, T ff
+- shift register: LFSR

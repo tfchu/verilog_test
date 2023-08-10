@@ -1,0 +1,9 @@
+combinational logic e.g. 
+- decoder / encoder
+- mux (multiplexer) / demux (demultiplexer)
+- adder: half adder, full adder
+- subtractor 
+- comparator 
+- ALU (arithmetic logic unit)
+- 
+- ADC/DAC
