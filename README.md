@@ -8,3 +8,6 @@
 
 # external resources
 - [uvm-tutorial-for-candy-lovers](https://github.com/cluelogic/uvm-tutorial-for-candy-lovers)
+
+# resources
+- https://www10.edacafe.com/book/ASIC/
