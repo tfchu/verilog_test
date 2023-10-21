@@ -32,7 +32,7 @@ module dff (clk, rstn, d, q, qb);
     always @(posedge clk or negedge rstn)
     begin
         if (!rstn) begin
-            // Asynchronous reset when reset goes high
+            // Asynchronous reset when reset goes low
             q <= 1'b0;
         end else begin
             // Assign D to Q on positive clock edge
@@ -79,6 +79,7 @@ module tb_dff();
         #10 rstn <= 1;
         for (int i = 0; i < 5; i=i+1) begin
             delay = $random;
+            $display(delay);
             #(delay) d <= i;
         end
 
